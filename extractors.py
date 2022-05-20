@@ -69,24 +69,60 @@ def extract_survey():
     # print('returning %d descripton and %d emotion tags'% (len(descriptor_tags), len(emotion_tags),))
     return all_tags, descriptor_tags, emotion_tags
 
-
 # Extracts tags from the hand made descriptors sheet. 'SoundDescriptorsParsed'
 def extract_literature():
  
     read_file = pd.read_excel ('data\SoundDescriptorsParsed.xlsx', sheet_name='SoundDescriptors')
-    read_file.to_csv ('data\SoundDescriptors_Survey.csv', index = None, header=True)
 
-    descriptors = []
-    with open(LITERATURE_FILE) as data_file:
-            csv_reader = csv.reader(data_file, delimiter=',')
-            for row in csv_reader:
-                if row[0]:
-                    descriptors.append(row[0].strip().lower())
+    descriptors = list(read_file['Word'])
+
+    # lower case
+    descriptors = [x.lower() for x in descriptors]
 
     # remove duplicates
     descriptors = list(set(descriptors))
+
     print('returning %d tags from lit'% len(descriptors))
     return descriptors
 
-# extract_literature()
-# extract_survey()
+def extract_question_num():
+    read_file = pd.read_csv(SURVEY_FILE)
+
+    descriptor_questions = []
+    emotion_questions = []
+    descriptor_tags = []
+    emotion_tags = []
+    for q_num in range(1,101):
+        for sub_q in range(1,3):
+            col_name = 'Q' + str(q_num) + '_' + str(sub_q)
+            mylist = list(read_file[col_name])
+            clean_tags = [item.split(',') for item in mylist[2:] if not(pd.isnull(item)) == True]
+            clean_tags = [item for sublist in clean_tags for item in sublist]
+
+            # convert to lower case
+            clean_tags = [x.lower().strip() for x in clean_tags]
+
+            # remove empty strings
+            clean_tags = [x for x in clean_tags if x]
+
+            clean_counter = 0
+            if sub_q == 1:
+                for t in clean_tags:
+                    if t not in emotion_tags:
+                        clean_counter +=1
+                        emotion_tags.append(t)
+                for x in range(1, clean_counter + 1):
+                    emotion_questions.append(q_num)
+            elif sub_q == 2:
+                for t in clean_tags:
+                    if t not in descriptor_tags:
+                        clean_counter +=1
+                        descriptor_tags.append(t)
+                for x in range(1, clean_counter + 1):
+                    descriptor_questions.append(q_num)
+            else:
+                print('error')
+
+    return descriptor_tags, emotion_tags, descriptor_questions, emotion_questions
+
+# extract_question_num()

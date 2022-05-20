@@ -72,6 +72,10 @@ Survey responses and literature descriptors:
 * tags_all.tsv
 * tensors_all.tsv
 
+Survey responses with correlated question numbers:
+* tags_questions.tsv
+* tensors_questions.tsv
+
 Output files stored in the **outputfiles** directory.
 
 Plot here: https://projector.tensorflow.org/
