@@ -51,6 +51,44 @@ def get_embeddings(descriptor_t, emotion_t):
 
     return descriptor_vectors, emotion_vectors, descriptor_words, emotion_words
 
+def get_embeddings_questions(descriptor_t, emotion_t, descriptor_questions, emotion_questions):
+
+    missed_words = []
+    emotion_words = []
+    descriptor_words = []
+
+    # get vectors for descriptors
+    descriptor_vectors = []
+    descriptor_qs = []
+    for idx, x in enumerate(descriptor_t):
+        try:
+            # remove duplicates
+            if x not in descriptor_words:
+                descriptor_vectors.append(wv[x])
+                descriptor_qs.append(descriptor_questions[idx])
+                descriptor_words.append(x)
+        except (KeyError, TypeError):
+            missed_words.append(x)
+            pass
+
+    # get vectors for emotions
+    emotion_vectors = []
+    emotion_qs = []
+    for idx, x in enumerate(emotion_t):
+        try:
+            # remove duplicates
+            if x not in emotion_words:
+                emotion_vectors.append(wv[x])
+                emotion_qs.append(emotion_questions[idx])
+                emotion_words.append(x)
+        except (KeyError, TypeError):
+            missed_words.append(x)
+            pass
+
+    print('Number of words not found in the word2vec model:', len(missed_words), ' (total= ', len(all_tags), ')')
+
+    return descriptor_vectors, emotion_vectors, descriptor_words, emotion_words, descriptor_qs, emotion_qs
+
 
 def write_tensors(tensors_filename, tags_filename, descriptor_vectors, emotion_vectors, descriptor_words, emotion_words):
     
@@ -103,3 +141,27 @@ descriptor_vectors, emotion_vectors, descriptor_words, emotion_words = get_embed
 print(len(descriptor_words))
 print(len(emotion_words))
 write_tensors(tensors_filename, tags_filename, descriptor_vectors, emotion_vectors, descriptor_words, emotion_words)
+
+
+# get embeddins with corresponding question numbers
+from extractors import extract_question_num
+descriptor_tags, emotion_tags, descriptor_questions, emotion_questions = extract_question_num()
+descriptor_vectors, emotion_vectors, descriptor_words, emotion_words, descriptor_qs, emotion_qs = get_embeddings_questions(descriptor_tags, emotion_tags, descriptor_questions, emotion_questions)
+
+tensors_filename = 'outputfiles/tensors_questions.tsv'
+tags_filename = 'outputfiles/tags_questions.tsv'
+
+with open(tensors_filename, 'wt', newline='') as out_file:
+    tsv_writer = csv.writer(out_file, delimiter='\t')
+    for vector in descriptor_vectors:
+        tsv_writer.writerow(vector)
+    for vector in emotion_vectors:
+        tsv_writer.writerow(vector)
+
+with open(tags_filename, 'wt', newline='') as out_file:
+    tsv_writer = csv.writer(out_file, delimiter='\t')
+    tsv_writer.writerow(['word', 'Question'])
+    for idx, descriptor in enumerate(descriptor_words):
+        tsv_writer.writerow([descriptor_words[idx], descriptor_qs[idx]])
+    for idx, emotion in enumerate(emotion_words):
+        tsv_writer.writerow([emotion_words[idx], emotion_qs[idx]])
