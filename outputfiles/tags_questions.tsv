@@ -50,6 +50,7 @@ sensory	12
 natural	12
 brittle	12
 lively	12
+chippy	12
 sharp	13
 piercing	13
 grating	13
@@ -109,6 +110,7 @@ metal	26
 scrape	26
 grinding	26
 aggressive	28
+melodic	28
 scraping	29
 slow	29
 calculated	29
@@ -125,10 +127,12 @@ metallic	32
 construction	32
 ghostly	33
 reversed	33
+breathy	34
 musical	35
 frenzied	35
 collecting	35
 distant	35
+monotonous	35
 echoing	36
 thunder	36
 machine	36
@@ -167,6 +171,7 @@ pattering	44
 descending	45
 harsh	45
 brassy	45
+percussive	45
 young	46
 skittering	46
 uplifting	46
@@ -202,7 +207,6 @@ relentless	60
 ticking	60
 impact	60
 wheezy	60
-monotonous	60
 assaulting	61
 police	61
 siren	61
@@ -227,7 +231,6 @@ hollow	69
 tripping	69
 manufactured	69
 blunt	70
-percussive	70
 crunchy	71
 fragmented	73
 falling	73
@@ -240,10 +243,10 @@ transient	74
 roomy	74
 rythm	74
 layered	76
-breathy	76
 sustained	76
 aspirational	76
 suspended	76
+awful	76
 feedback	77
 strong	78
 boisterous	78
@@ -252,7 +255,6 @@ crashy	79
 ending	80
 concluding	80
 watery	81
-melodic	81
 glottal	81
 splashy	81
 balanced	82
@@ -372,6 +374,7 @@ unpleasant	20
 cautious	20
 jaunty	20
 travel	20
+motion	20
 trudging	20
 walking	20
 mellow	21
@@ -390,8 +393,10 @@ noisy	24
 uneasy	25
 concerning	25
 fearful	25
+irritating	25
 determined	28
 annoyed	28
+gentle	28
 neutral	29
 anticipatory	29
 relaxed	31
@@ -406,7 +411,9 @@ terrifying	32
 scare	33
 fear	33
 defensive	33
+disturbing	34
 profound	35
+boring	35
 timid	36
 exploratory	36
 accidental	37
@@ -424,7 +431,6 @@ relaxing	39
 comfortable	40
 welcoming	40
 calming	40
-gentle	40
 watery	40
 fast	41
 rush	41
@@ -441,14 +447,15 @@ chaotic	45
 jarring	45
 worried	45
 abrupt	45
+melancholy	45
 playful	46
 strange	46
-disturbing	48
 otherworldly	49
 scary	49
 painful	49
 alarmed	50
 shock	50
+awe	50
 indifferent	51
 encouraging	51
 swift	51
@@ -471,7 +478,6 @@ alarm	62
 angry	62
 intriguing	62
 unnerving	62
-irritating	64
 surprising	64
 light	64
 energizing	64
@@ -487,6 +493,7 @@ clunky	70
 clumsy	70
 rushed	70
 proximate	70
+brutal	71
 satisfying	73
 claustrophobic	73
 close	73
@@ -495,6 +502,7 @@ harmonious	76
 dignified	76
 courtly	76
 synthesized	76
+awful	76
 surprised	78
 amused	78
 falling	79
@@ -541,6 +549,7 @@ mystified	96
 delighted	96
 saccharine	96
 nerdy	97
+wonderment	97
 steadiness	99
 pause	99
 mystic	100
