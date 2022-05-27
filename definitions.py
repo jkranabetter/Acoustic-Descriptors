@@ -34,34 +34,69 @@ def get_meaning(w):
         Tag['Meaning'] = ''
     return Tag
 
-# get clean survey tags
-all_tags, descriptor_tags, emotion_tags = extract_survey()
-descriptor_tags = list(set(descriptor_tags))
-emotion_tags = list(set(emotion_tags))
+def main():
 
-# check for multiple word tags
-for item in (descriptor_tags + emotion_tags):
-    items = item.split(' ')
-    if len(items) > 1:
-        print('WARNING ADDRESS FORMATTING: %s'% item)
-print()
+    # get clean survey tags
+    all_tags, descriptor_tags, emotion_tags = extract_survey()
+    descriptor_tags = list(set(descriptor_tags))
+    emotion_tags = list(set(emotion_tags))
 
-# create dataframe
-column_names = ['Tag', 'Class', 'Part of Speech', 'Meaning', 'Meaning Number', 'From']
-df = pd.DataFrame(columns = column_names)
+    # check for multiple word tags (tags with a space)
+    for item in (descriptor_tags + emotion_tags):
+        items = item.split(' ')
+        if len(items) > 1:
+            print('WARNING ADDRESS FORMATTING: %s'% item)
+    print()
 
-# retrieve definitions where they exist
-for tag in descriptor_tags:
-    entry = get_meaning(tag)
-    entry['Class'] = 'Descriptor'
-    df = df.append(entry, ignore_index=True)
+    # # create dataframe
+    # column_names = ['Tag', 'Class', 'Part of Speech', 'Meaning', 'Meaning Number', 'From']
+    # df = pd.DataFrame(columns = column_names)
 
-for tag in emotion_tags:
-    entry = get_meaning(tag)
-    entry['Class'] = 'Emotion'
-    df = df.append(entry, ignore_index=True)
+    # read from xlsx
+    df = pd.read_excel('data\SoundDescriptorsParsed.xlsx', sheet_name='Survey Descriptors') 
 
-# write to xlsx
-with pd.ExcelWriter('data\SoundDescriptorsParsed.xlsx',
-                    mode='a', if_sheet_exists = 'replace') as writer:  
-    df.to_excel(writer, sheet_name='Survey Descriptors', index = False)
+    df_descriptors = df.loc[df['Class'] == 'Descriptor']
+    df_emotions = df.loc[df['Class'] == 'Emotion']
+
+    # check if Tag/Class pair already in df
+    new_desc_count = 0
+    for tag in descriptor_tags:
+        tag_exists = False
+        for index, row in df_descriptors.iterrows():
+            if (row['Tag'] == tag):
+                tag_exists = True
+                break
+        # if not get definition and add to df
+        if tag_exists == False:
+            print(f'cant find {tag}, getting meaning and adding...')
+            entry = get_meaning(tag)
+            entry['Class'] = 'Descriptor'
+            df = df.append(entry, ignore_index=True)
+            new_desc_count +=1
+
+    # check if Tag/Class pair already in df
+    new_emo_count = 0
+    for tag in emotion_tags:
+        tag_exists = False
+        for index, row in df_emotions.iterrows():
+            if (row['Tag'] == tag):
+                tag_exists = True
+                break
+        # if not get definition and add to df
+        if tag_exists == False:
+            print(f'cant find {tag}, getting meaning and adding...')
+            entry = get_meaning(tag)
+            entry['Class'] = 'Emotion'
+            df = df.append(entry, ignore_index=True)
+            new_emo_count += 1
+
+    # write to xlsx
+    with pd.ExcelWriter('data\SoundDescriptorsParsed.xlsx',
+                        mode='a', if_sheet_exists = 'replace') as writer:  
+        df.to_excel(writer, sheet_name='Survey Descriptors', index = False)
+
+    print(f'Done, added {new_desc_count} descriptors and {new_emo_count} emotions to the spreadsheet.')
+
+
+if __name__ == '__main__':
+    main()
