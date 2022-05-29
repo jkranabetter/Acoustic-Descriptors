@@ -1,19 +1,26 @@
 import csv
 from nltk.stem import *
 from nltk.stem.porter import *
-stemmer = PorterStemmer()
-
 import gensim.downloader as api
-wv = api.load('word2vec-google-news-300') # Number of words not found in the word2vec model: 33  (total=  385 )
-
 from gensim.models import Word2Vec
 import nltk
-nltk.download('brown')
 from nltk.corpus import brown
+from nltk.stem import WordNetLemmatizer 
+
+"""
+Plot at https://projector.tensorflow.org/ with
+Perplexity: 5
+Leaning rate: 10
+Supervise: 10
+"""
+
+stemmer = PorterStemmer()
+wv = api.load('word2vec-google-news-300') # Number of words not found in the word2vec model: 33  (total=  385 )
+
+nltk.download('brown')
 model = Word2Vec(brown.sents())
 
 nltk.download('wordnet')
-from nltk.stem import WordNetLemmatizer 
 lemmatizer = WordNetLemmatizer()
 
 
