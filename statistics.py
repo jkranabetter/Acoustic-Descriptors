@@ -85,13 +85,48 @@ for t in all_tags_set:
         indict_count +=1
 tag_stats['% tags in dictionary'] = indict_count/len(all_tags_set)*100
 
-print_stats('TAG STATS', tag_stats)
 
-print('-------TAGS IN BOTH---------------')
+
+
+# read literature tags from xlsx
+df = pd.read_excel('data\SoundDescriptorsParsed.xlsx', sheet_name='SoundDescriptors') 
+
+lit_tag_stats = {}
+lit_tag_stats['total tags'] = len(df)
+
+# detect duplicates
+lit_words = df['Word'].to_list()
+lit_words = [w.lower() for w in lit_words]
+
+for item in lit_words:
+    if lit_words.count(item) > 1:
+        print(f'WARNING: found duplicate in lit: {item}')
+
+survey_coverage = 0
+for t in lit_words:
+    if t in all_tags_set:
+        survey_coverage += 1
+lit_tag_stats['% words in survey tags'] = survey_coverage/len(lit_words)*100
+lit_tag_stats['% words not in survey tags'] = 100 - lit_tag_stats['% words in survey tags']
+
+lit_coverage = 0
+for t in all_tags_set:
+    if t in lit_words:
+        lit_coverage += 1
+tag_stats['% words in lit words'] = lit_coverage/len(all_tags_set)*100
+tag_stats['% not in lit words'] = 100 - tag_stats['% words in lit words']
+
+
+# print the stats
+print_stats('SURVEY TAG STATS', tag_stats)
+print_stats('LITERATURE TAG STATS', lit_tag_stats)
+
+
+print('-------TAGS IN BOTH EMOTION AND DESCRIPTOR---------------')
 print(tags_in_both)
 print()
 
-print('-------MOST COMMON TAGS------------')
+print('-------MOST COMMON SURVEY TAGS------------')
 occurence_count = Counter(all_tags).most_common(10)
 print(occurence_count)
 print()
