@@ -2,8 +2,8 @@ import csv
 import re
 import pandas as pd
 
-SURVEY_FILE = 'data\descriptors_may25.csv'
-LITERATURE_FILE = 'data\SoundDescriptors_Survey.csv'
+SURVEY_FILE = 'data\qualtrics_edited.csv'
+LIBRARY_FILE = 'data\DescriptorsLibrary.xlsx'
 
 # Extracts tags from the current processed tags file SURVEY_FILE
 def extract_survey():
@@ -72,7 +72,7 @@ def extract_survey():
 # Extracts tags from the hand made descriptors sheet. 'SoundDescriptorsParsed'
 def extract_literature():
  
-    read_file = pd.read_excel ('data\SoundDescriptorsParsed.xlsx', sheet_name='SoundDescriptors')
+    read_file = pd.read_excel (LIBRARY_FILE, sheet_name='SoundDescriptors')
 
     descriptors = list(read_file['Word'])
 
@@ -124,5 +124,3 @@ def extract_question_num():
                 print('error')
 
     return descriptor_tags, emotion_tags, descriptor_questions, emotion_questions
-
-# extract_question_num()

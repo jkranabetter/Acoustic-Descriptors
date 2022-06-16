@@ -12,6 +12,7 @@ Plot at https://projector.tensorflow.org/ with
 Perplexity: 5
 Leaning rate: 10
 Supervise: 10
+to 5000
 """
 
 stemmer = PorterStemmer()
