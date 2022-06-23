@@ -91,7 +91,7 @@ tag_stats['% tags in dictionary'] = indict_count/len(all_tags_set)*100
 
 
 # read literature tags from xlsx
-df = pd.read_excel(LIBRARY_FILE, sheet_name='SoundDescriptors') 
+df = pd.read_excel(LIBRARY_FILE, sheet_name='Sound Descriptors') 
 
 lit_tag_stats = {}
 lit_tag_stats['total tags'] = len(df)
