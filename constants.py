@@ -1,0 +1,5 @@
+SURVEY_FILE = 'data/qualtrics_edited.csv'
+QUALTRICS_FILE = 'data/qualtrics_raw.csv'
+LIBRARY_FILE = 'data/DescriptorsLibrary.xlsx'
+FILENAMES = 'data/filenames.csv'
+RESPONSE_FILE = 'data/tags_per_question.csv'

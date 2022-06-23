@@ -1,9 +1,7 @@
 import csv
 import re
 import pandas as pd
-
-SURVEY_FILE = 'data\qualtrics_edited.csv'
-LIBRARY_FILE = 'data\DescriptorsLibrary.xlsx'
+from constants import *
 
 # Extracts tags from the current processed tags file SURVEY_FILE
 def extract_survey():

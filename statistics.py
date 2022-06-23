@@ -1,9 +1,7 @@
 import extractors
-import csv
-import re
+from constants import *
 
 import pandas as pd
-import numpy as np
 from numpy import mean
 from scipy.stats import trim_mean
 
@@ -11,11 +9,6 @@ import plotly.express as px
 from collections import Counter
 import enchant
 dictionary = enchant.Dict("en_US")
-
-QUALTRICS_FILE = 'data/qualtrics_raw.csv'
-SURVEY_FILE = 'data/qualtrics_edited.csv'
-LIBRARY_FILE = 'data/DescriptorsLibrary.xlsx'
-RESPONSE_FILE = 'data/tags_per_question.csv'
 
 raw_stats = {}
 

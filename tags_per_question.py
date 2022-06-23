@@ -1,12 +1,10 @@
 import pandas as pd
 import csv
+from constants import *
 
 """
 generate the file that correlates question numbers, filenames, and the resulting emotion and descriptive tags
 """
-
-SURVEY_FILE = 'data/qualtrics_edited.csv'
-FILENAMES = 'data/filenames.csv'
 
 read_file = pd.read_csv(SURVEY_FILE)
 
