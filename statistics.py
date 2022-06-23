@@ -1,9 +1,7 @@
 import extractors
-import csv
-import re
+from constants import *
 
 import pandas as pd
-import numpy as np
 from numpy import mean
 from scipy.stats import trim_mean
 
@@ -11,10 +9,6 @@ import plotly.express as px
 from collections import Counter
 import enchant
 dictionary = enchant.Dict("en_US")
-
-QUALTRICS_FILE = 'data\qualtrics_raw.csv'
-SURVEY_FILE = 'data\descriptors_may18.csv'
-LITERATURE_FILE = 'data\SoundDescriptorsParsed.csv'
 
 raw_stats = {}
 
@@ -25,8 +19,9 @@ def print_stats(title, library):
     for key, value in library.items():
         if isinstance(value, (int, float)):
             print('{:<35s}{:<8.2f}'.format(key,float(value)))
+        elif isinstance(value, (str)):
+            print('{:<35s}{:<35s}'.format(key,value))
     print()
-
 
 dataframe = pd.read_csv(QUALTRICS_FILE)
 
@@ -54,6 +49,13 @@ raw_stats['average completion time (m)'] = mean(completion_times)
 raw_stats['min completion time (m)'] = min(completion_times)
 raw_stats['max completion time (m)'] = max(completion_times)
 raw_stats['trim mean completion time (m)'] = trim_mean(completion_times, 0.2)
+
+response_df = pd.read_csv(RESPONSE_FILE)
+
+# find questions with no tags
+empty_questions_df = response_df.loc[response_df['Emotion Tags'] == '[]']
+empty_questions = list(empty_questions_df['Question Number'])
+raw_stats['empty questions'] = str(empty_questions)
 
 print_stats('SURVEY STATS', raw_stats)
 
@@ -89,7 +91,7 @@ tag_stats['% tags in dictionary'] = indict_count/len(all_tags_set)*100
 
 
 # read literature tags from xlsx
-df = pd.read_excel('data\SoundDescriptorsParsed.xlsx', sheet_name='SoundDescriptors') 
+df = pd.read_excel(LIBRARY_FILE, sheet_name='Sound Descriptors') 
 
 lit_tag_stats = {}
 lit_tag_stats['total tags'] = len(df)

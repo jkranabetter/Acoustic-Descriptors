@@ -26,33 +26,43 @@ Results will look something like:
 -------------- SURVEY STATS --------------
 STAT                               VALUE   
 -----------------------------------------------
-total responses                    87.00
-completion count                   23.00
-abandon count                      64.00
-completion rate %                  26.44
-average completion time (m)        153.67
+total responses                    95.00
+completion count                   28.00
+abandon count                      67.00
+completion rate %                  29.47
+average completion time (m)        128.75
 min completion time (m)            4.33
 max completion time (m)            1324.68
-trim mean completion time (m)      30.23
+trim mean completion time (m)      23.06
+empty questions                    [1, 6, 27, 72]
 
--------------- TAG STATS --------------
+-------------- SURVEY TAG STATS --------------
 STAT                               VALUE   
 -----------------------------------------------
-total tags                         938.00
-total unique tags                  598.00
-total unique tag/class pairs       648.00
-total descriptor tags              530.00
-unique descriptor tags             378.00
-total emotion tags                 408.00
-unique emotion tags                270.00
-tags described as both             50.00
-% tags in dictionary               92.81
+total tags                         1072.00
+total unique tags                  661.00
+total unique tag/class pairs       724.00
+total descriptor tags              585.00
+unique descriptor tags             409.00
+total emotion tags                 487.00
+unique emotion tags                315.00
+tags described as both             63.00
+% tags in dictionary               93.80
+% words in lit words               10.59
+% not in lit words                 89.41
 
--------TAGS IN BOTH---------------
-{'uplifting', 'blaring', 'noisy', 'natural', 'expectant', 'alarm', 'enticing', 'close', 'powerful', 'dark', 'watery', 'mellow', 'energetic', 'fast', 'alert', 'warning', 'urgency', 'nature', 'on-edge', 'happy', 'smooth', 'chaotic', 'edgy', 'comfortable', 'moist', 'falling', 'alarming', 'busy', 'scary', 'mechanical', 'harmonious', 'calming', 'loud', 'movement', 'futuristic', 'warm', 'abrasive', 'rhythmic', 'light', 'artificial', 'exciting', 'annoying', 'bright', 'playful', 'dangerous', 'angry', 'soft', 'naturalistic', 'urgent', 'strident'}
+-------------- LITERATURE TAG STATS --------------
+STAT                               VALUE
+-----------------------------------------------
+total tags                         232.00
+% words in survey tags             30.17
+% words not in survey tags         69.83
 
--------MOST COMMON TAGS------------
-[('synthetic', 12), ('sharp', 10), ('bright', 10), ('alarming', 10), ('annoying', 9), ('abrasive', 8), ('scary', 8), ('exciting', 7), ('tense', 7), ('alert', 7)]
+-------TAGS IN BOTH EMOTION AND DESCRIPTOR---------------
+{'quick', 'shrill', 'light', 'powerful', 'scary', 'jarring', 'edgy', 'noisy', 'happy', 'annoying', 'warm', 'warning', 'busy', 'smooth', 'rhythmic', 'close', 'calming', 'natural', 'surprised', 'soft', 'chill', 'sharp', 'dynamic', 'conversational', 'mechanical', 'abrasive', 'blaring', 'dangerous', 'alarm', 'comfortable', 'expectant', 'urgent', 'mellow', 'uplifting', 'exciting', 'bright', 'playful', 'loud', 'awful', 'strident', 'on-edge', 'urgency', 'watery', 'ominous', 'falling', 'nature', 'empty', 'harmonious', 'dark', 'alarming', 'angry', 'energetic', 'futuristic', 'alert', 'artificial', 'fast', 'chaotic', 'grainy', 'hollow', 'movement', 'naturalistic', 'moist', 'enticing'}
+
+-------MOST COMMON SURVEY TAGS------------
+[('synthetic', 13), ('sharp', 12), ('bright', 12), ('annoying', 10), ('alarming', 10), ('exciting', 9), ('peaceful', 9), ('abrasive', 8), ('tense', 8), ('scary', 8)]
 ```
 
 ---
@@ -86,9 +96,7 @@ Select the tensors file for vectors, and the corresponding tags file for metadat
 ---
 
 ## Extracting Word Definitions
-Takes ~3 hours to extract definitions for all words. **Not updated to only extract definitions where we dont already have them yet.**
-
-Will only need to run this each time we collect new descriptor data in the *descriptors_{date}.csv* file. View the definitions in the *SoundDescriptorsParsed.xlsx* file on the *Survey Descriptors* sheet.
+Run this file each time we collect new descriptor data in the *qualtrics_edited.csv* file. View the definitions in the *DescriptorsLibrary.xlsx* file on the *Survey Descriptors* sheet.
 
 ```
 python definitions.py

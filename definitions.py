@@ -2,11 +2,10 @@ from lib2to3.pgen2.token import SLASH
 from extractors import extract_survey
 import pandas as pd
 from PyDictionary import PyDictionary
+from constants import *
 
 """
 Gets tags from descriptors_date.csv, gets definitions and writes to SoundDescriptorsParsed.
-Warning: Running this takes a few hours as writte.
-Need to update to only get definitions where needed.
 """
 
 dictionary=PyDictionary()
@@ -53,7 +52,7 @@ def main():
     # df = pd.DataFrame(columns = column_names)
 
     # read from xlsx
-    df = pd.read_excel('data\SoundDescriptorsParsed.xlsx', sheet_name='Survey Descriptors') 
+    df = pd.read_excel(LIBRARY_FILE, sheet_name='Survey Descriptors') 
 
     df_descriptors = df.loc[df['Class'] == 'Descriptor']
     df_emotions = df.loc[df['Class'] == 'Emotion']
@@ -91,7 +90,7 @@ def main():
             new_emo_count += 1
 
     # write to xlsx
-    with pd.ExcelWriter('data\SoundDescriptorsParsed.xlsx',
+    with pd.ExcelWriter(LIBRARY_FILE,
                         mode='a', if_sheet_exists = 'replace') as writer:  
         df.to_excel(writer, sheet_name='Survey Descriptors', index = False)
 
