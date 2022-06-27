@@ -25,7 +25,10 @@ def main():
         #     if not pd.isna(row['Meaning']):
         #         print(row['Tag'])
 
-        print(row['Tag'])
+        if not str(row['Meaning']).startswith('[') and str(row['Meaning']) != 'nan' and str(row['Meaning Number']) == 'nan':
+            row['Meaning Number'] = 1
+
+        # print(row['Tag'])
 
     # write to xlsx
     with pd.ExcelWriter(LIBRARY_FILE,
