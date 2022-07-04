@@ -12,20 +12,23 @@ def main():
 
     for idx, row in df.iterrows():
         # find single definitions and remove the silly formatting
-        # meaning = str(row['Meaning'])
-        # if meaning.startswith("['"):
-        #     if meaning.endswith("']"):
-        #         if meaning.count(',') == 0:
-        #             clean_meaning = meaning[2:-2]
-        #             row['Meaning'] = clean_meaning
+        meaning = str(row['Meaning'])
+        if meaning.startswith("['"):
+            if meaning.endswith("']"):
+                if meaning.count(',') == 0:
+                    clean_meaning = meaning[2:-2]
+                    row['Meaning'] = clean_meaning
 
         # detect where I have missed inserting POS
-        # if row['Part of Speech'] == 'None':
-        #     # print(row['Meaning'])
-        #     if not pd.isna(row['Meaning']):
-        #         print(row['Tag'])
+        if row['Part of Speech'] == 'None':
+            # print(row['Meaning'])
+            if not pd.isna(row['Meaning']):
+                print(row['Tag'])
 
-        print(row['Tag'])
+        if not str(row['Meaning']).startswith('[') and str(row['Meaning']) != 'nan' and str(row['Meaning Number']) == 'nan':
+            row['Meaning Number'] = 1
+
+        # print(row['Tag'])
 
     # write to xlsx
     with pd.ExcelWriter(LIBRARY_FILE,
