@@ -8,7 +8,6 @@ from nltk.tag import UnigramTagger
 '''
 Basic NLP for AUME by Joshua Kranabetter Feb 2022.
 NLTK part of speech (pos) tagging and word filtering based on tag type.
-
 '''
 
 class WordFilter(object):

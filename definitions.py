@@ -5,7 +5,7 @@ from PyDictionary import PyDictionary
 from constants import *
 
 """
-Gets tags from descriptors_date.csv, gets definitions and writes to SoundDescriptorsParsed.
+Gets tags from survey, gets definitions and writes to DescriptorsLibrary.
 """
 
 dictionary=PyDictionary()
