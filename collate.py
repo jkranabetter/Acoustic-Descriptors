@@ -17,7 +17,7 @@ for idx, row in df_lit.iterrows():
     # if we havent seen the word yet, add it
     if row['Word'] not in words_set:
         # print(row['Word'])
-        data.append([row['Word'], row['Type'], row['Meaning'], row['Meaning Number'], row['From'], '', '', ''])
+        data.append([row['Word'], row['Type'], row['Meaning'], row['Meaning Number'], row['From'], 'Literature', '', '', ''])
 
 # add items from the survey
 for idx, row in df_survey.iterrows():
@@ -27,9 +27,9 @@ for idx, row in df_survey.iterrows():
     # if we havent seen the word yet, add it
     if row['Tag'] not in words_set:
         # print(row['Word'])
-        data.append([row['Tag'], row['Part of Speech'], row['Meaning'], row['Meaning Number'], row['From'], '', '', ''])
+        data.append([row['Tag'], row['Part of Speech'], row['Meaning'], row['Meaning Number'], row['From'], 'Survey', '', '', ''])
 
-collated_df = pd.DataFrame(data, columns=['Word', 'Part of Speech', 'Meaning', 'Meaning Number', 'Source', 'Synonym Group','Synonyms', 'Antonyms'])
+collated_df = pd.DataFrame(data, columns=['Word', 'Part of Speech', 'Meaning', 'Meaning Number', 'Meaning Source', 'Word Source', 'Synonym Group','Synonyms', 'Antonyms'])
 
 syn_group = 0
 group_index = 0
