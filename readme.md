@@ -105,5 +105,8 @@ python definitions.py
 
 ---
 
+## Todo
+Entertaining spelt wrong in tags
+
 ## Author
 Joshua Kranabetter
