@@ -123,8 +123,8 @@ all_tags = list(set(all_tags))
 descriptor_tags = list(set(descriptor_tags))
 emotion_tags = list(set(emotion_tags))
 
-tensors_filename = 'outputfiles/tensors_survey.tsv'
-tags_filename = 'outputfiles/tags_survey.tsv'
+tensors_filename = 'plot_files/tensors_survey.tsv'
+tags_filename = 'plot_files/tags_survey.tsv'
 
 descriptor_vectors, emotion_vectors, descriptor_words, emotion_words = get_embeddings(descriptor_tags, emotion_tags)
 print(len(descriptor_words))
@@ -142,8 +142,8 @@ descriptor_tags = list(set(descriptor_tags))
 all_tags += descriptors_csv
 all_tags = list(set(all_tags))
 
-tensors_filename = 'outputfiles/tensors_all.tsv'
-tags_filename = 'outputfiles/tags_all.tsv'
+tensors_filename = 'plot_files/tensors_all.tsv'
+tags_filename = 'plot_files/tags_all.tsv'
 
 descriptor_vectors, emotion_vectors, descriptor_words, emotion_words = get_embeddings(descriptor_tags, emotion_tags)
 print(len(descriptor_words))
@@ -156,8 +156,8 @@ from extractors import extract_question_num
 descriptor_tags, emotion_tags, descriptor_questions, emotion_questions = extract_question_num()
 descriptor_vectors, emotion_vectors, descriptor_words, emotion_words, descriptor_qs, emotion_qs = get_embeddings_questions(descriptor_tags, emotion_tags, descriptor_questions, emotion_questions)
 
-tensors_filename = 'outputfiles/tensors_questions.tsv'
-tags_filename = 'outputfiles/tags_questions.tsv'
+tensors_filename = 'plot_files/tensors_questions.tsv'
+tags_filename = 'plot_files/tags_questions.tsv'
 
 with open(tensors_filename, 'wt', newline='') as out_file:
     tsv_writer = csv.writer(out_file, delimiter='\t')
