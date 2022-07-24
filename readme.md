@@ -3,9 +3,10 @@
 Analysis and data manegent for the audio descriptors study.
 
 ## Data Files
-*descriptors_{date}.csv* is the current edited survey data.
-*qualtrics_raw.csv* is the data file directly from qualtrics.
-*SoundDescriptorsParsed.xlsx* stores the official tags list for the literature and survey corpora.
+```descriptors_{date}.csv``` is the current edited survey data.\
+```qualtrics_raw.csv``` is the data file directly from qualtrics.\
+```qualtrics_edited.csv``` is the hand filtered qualtrics file.\
+```DescriptorsLibrary.xlsx``` stores the official tags list for the literature and survey corpora along with the collated final list.\
 
 ## Dependencies
 
